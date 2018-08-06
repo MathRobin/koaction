@@ -1,0 +1,33 @@
+{
+  "name": "@yorisa/koaction",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --silent"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MathRobin/Koaction.git"
+  },
+  "jest": {
+    "automock": false
+  },
+  "author": "Yorisa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MathRobin/Koaction/issues"
+  },
+  "engines": {
+    "node": "8.9.3",
+    "npm": "5.5.1"
+  },
+  "homepage": "https://github.com/MathRobin/Koaction#readme",
+  "dependencies": {
+    "async-exit-hook": "2.0.1",
+    "koa": "2.5.1"
+  },
+  "devDependencies": {
+    "jest": "22.4.3"
+  }
+}
