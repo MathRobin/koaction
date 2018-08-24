@@ -7,11 +7,99 @@ Why it can help me ?
 For some people, it's hard to begin a new project with KoaJs, even if they're used to Express. All the latest concepts of EcmaScript in one framework. It can be really disturbing. So, with Koaction, I expose an opinionated architecture around Koa and try to enhance the way of developing REST apis.
 
 ## Components
+### Endpoints
+Every endpoint in Koaction are conditionned by its name. You can see them as routes. For example with this file :
+```javascript
+// File [project root]/app/endpoints/public/hello.js
+module.exports = function (config) {
+    async function get(context) {
+        context.body = 'world !';
+    }
+
+    return {
+        get
+    };
+};
+```
+If you make a GET request to path `/public/hello`, it will answer ; "world !".
+
+#### Auto-detect
+
+Every file, will be recursively read by koaction and be introduced as a new endpoint. A small point about "convention over configuration". If your exported function is named `get`, by defaut it will map the GET method to the endpoint and the route will be the name file.
+In the previous sample, file is `public/hello`, so this is the name of the route. and the exported function is `get`. So this is map to : `GET public/hello`.
+
+##### Allowed methods and supercharge
+Any existing method defined by HTTP protocol is authorized by koaction : OPTIONS (dynamically mapped), HEAD, GET, OPTIONS, POST, DELETE, ...
+
+You can force the method name or use multiple method name for only on method. Examples :
+```javascript
+// File [project root]/app/endpoints/public/hello.js
+module.exports = function (config) {
+    async function get(context) {
+        context.body = 'world !';
+    }
+    get.methods = 'post';
+
+    return {
+        get
+    };
+};
+```
+Here the function get will answer to `POST`.
+
+```javascript
+// File [project root]/app/endpoints/public/hello.js
+module.exports = function (config) {
+    async function get(context) {
+        context.body = 'world !';
+    }
+    get.methods = ['get', 'post', 'delete'];
+
+    return {
+        get
+    };
+};
+```
+Here the function *get* will answer to `GET`, `POST` and `DELETE`.
+
+##### Changing route name and arguments
+As you understood in previous point, the endpoint has for route name, the path to the file. But of course, you can change it.
+
+Example :
+```javascript
+// File [project root]/app/endpoints/public/hello.js
+module.exports = function (config) {
+    async function get(context) {
+        context.body = 'world !';
+    }
+    get.path = 'hello';
+
+    return {
+        get
+    };
+};
+```
+Normally this endpoint will answer to `GET public/hello` but now, it answers to `GET hello`. And only to this one.
+
+###### Arguments
+For arguments, koaction let `koa-router` make the job. Because it does it well. So, example :
+```javascript
+// File [project root]/app/endpoints/public/hello.js
+module.exports = function (config) {
+    async function get(context) {
+        context.body = context.params.name ? context.params.name : 'world !';
+    }
+    get.path = 'hello/:name';
+
+    return {
+        get
+    };
+};
+```
+Every named params is reported in `context.params` object. More docs here : https://github.com/alexmingoia/koa-router#url-parameters
+
 ### Middlewares
 Classical middlewares for Koa. Each request can through it, be affected, be rejected.
-
-### Routes
-Every route in Koaction are conditionned by its name.
 
 ### Skills
 Everything you can bring to the app context. 
@@ -75,7 +163,25 @@ module.exports = sql;
 When starting the app will firstly boot the skills which depends on nothing and after the skills which depends on the first skills already resolved are resolved too.
 
 ### Environnements
-You can provide a JSON configuration file for every environment you need.
+You can provide a JSON configuration file for every environment you need. By default, these files are in `_conf` folder at root. Expect the `http` part, nothing else is mandatory and you are free to extend it as you want/need.
+```javascript
+// File [project root]/_conf/env.development.json
+{
+  "language": "fr",
+  "country": "FR",
+  "cdn": "http://127.0.0.1:3002",
+  "http": {
+    "port": "3010",
+    "domain": "localhost",
+    "protocol": "http"
+  },
+  "db": {
+    "DATABASE_URL": "..."
+  },
+  ..
+}
+```
+In any skill, any middleware and in any endpoint, the config param correspond to the file corresponding to the current environment. You can have any environment as you want. We recommend at least `development` and `production`. 
 
 ### koaction.json
 The main important file for Koaction, but it's not mandatory. It just allows you to change default values for your app architecture.
