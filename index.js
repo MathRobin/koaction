@@ -1,10 +1,13 @@
-export default class koaction {
+const skill = require('./src/skills');
+
+module.exports = class Koaction {
     constructor(config) {
-        const
-            Koa = require('koa');
+        const Koa = require('koa');
 
         this.app = new Koa();
-        this.config = config;
+        this.config = require('./src/config')(config);
+
+        require('./src/skills')(this.app, this.config);
 
         process
             .on('SIGTERM', function () {
@@ -14,13 +17,9 @@ export default class koaction {
         return this;
     }
 
-    registerSkills(path) {
-        require(path)(this.app, this.config);
-    }
-
     run() {
         this
             .app
-            .listen(config.http.port);
+            .listen(this.config.http.port);
     }
-}
+};

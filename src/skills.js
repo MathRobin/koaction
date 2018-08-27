@@ -1,7 +1,9 @@
 module.exports = async function (app, config) {
     const
         fileSystem = require('fs'),
-        availablePaths = fileSystem.readdirSync('./app/skills').sort(),
+        path = require('path'),
+        process = require('process'),
+        availablePaths = fileSystem.readdirSync('./src/skills'),
         stillNeedToBeLoaded = {};
 
     let
@@ -11,7 +13,7 @@ module.exports = async function (app, config) {
         if ('index.js' !== file && false === file.endsWith('.spec.js')) {
             const
                 fileName = file.substring(0, file.length - 3),
-                skillModule = require('./' + fileName);
+                skillModule = require(process.cwd() + '/src/skills/' + file);
 
             if (!skillModule.dependsOn || !skillModule.dependsOn.length) {
                 app.context[fileName] = await skillModule(config, app.context);
