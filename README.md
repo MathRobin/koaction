@@ -1,4 +1,4 @@
-# Koaction
+# Koaction [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction)
 
 /!\ Still under development
 
