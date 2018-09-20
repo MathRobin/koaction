@@ -47,13 +47,14 @@ module.exports = function (config) {
 ```
 Here the function get will answer to `POST`.
 
-```javascript
+```diff
 // File [project root]/app/endpoints/public/hello.js
 module.exports = function (config) {
     async function get(context) {
         context.body = 'world !';
     }
-    get.methods = ['get', 'post', 'delete'];
+-    get.methods = 'post';
++    get.methods = ['get', 'post', 'delete'];
 
     return {
         get
@@ -66,13 +67,14 @@ Here the function *get* will answer to `GET`, `POST` and `DELETE`.
 As you understood in previous point, the endpoint has for route name, the path to the file. But of course, you can change it.
 
 Example :
-```javascript
+```diff
 // File [project root]/app/endpoints/public/hello.js
 module.exports = function (config) {
     async function get(context) {
         context.body = 'world !';
     }
-    get.path = 'hello';
+-    get.methods = ['get', 'post', 'delete'];
++    get.path = 'hello';
 
     return {
         get
@@ -89,7 +91,8 @@ module.exports = function (config) {
     async function get(context) {
         context.body = context.params.name ? context.params.name : 'world !';
     }
-    get.path = 'hello/:name';
+-    get.path = 'hello';
++    get.path = 'hello/:name';
 
     return {
         get
