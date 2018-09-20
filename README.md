@@ -85,7 +85,7 @@ Normally this endpoint will answer to `GET public/hello` but now, it answers to 
 
 ###### Arguments
 For arguments, koaction let `koa-router` make the job. Because it does it well. So, example :
-```javascript
+```diff
 // File [project root]/app/endpoints/public/hello.js
 module.exports = function (config) {
     async function get(context) {
