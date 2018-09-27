@@ -1,4 +1,4 @@
-# Koaction [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/)
+# Koaction [![npm version](https://badge.fury.io/js/koaction.svg)](https://badge.fury.io/js/koaction) [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/)
 
 /!\ Still under development
 
