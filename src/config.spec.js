@@ -24,7 +24,7 @@ for (const environment of environments) {
             expect(config.http.protocol).toMatch(/(http|https)/);
         });
 
-        it('should have package.json important rules', () => {
+        it('should have other package.json important rules', () => {
             expect(config.name).toBeDefined();
             expect(config.version).toBeDefined();
             expect(config.repository).toBeDefined();

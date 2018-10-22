@@ -1,3 +1,10 @@
+function freezeAll (target) {
+    Object.freeze(target);
+    Object
+        .keys(target)
+        .forEach((key) => Object.freeze(target[key]));
+}
+
 module.exports = function (superConfig) {
     'use strict';
 
@@ -8,7 +15,7 @@ module.exports = function (superConfig) {
 
     let environment = 'development';
 
-    if (-1 < allowedEnvironments.indexOf(process.env.NODE_ENV)) {
+    if (allowedEnvironments.includes(process.env.NODE_ENV)) {
         environment = process.env.NODE_ENV;
     }
 
@@ -32,8 +39,7 @@ module.exports = function (superConfig) {
         config.http.currentDomain += ':' + config.http.port;
     }
 
-    Object.freeze(config);
-    Object.freeze(config.http);
+    freezeAll(config);
 
     console.log('[# env.]', config.environment);
     console.log('[# url]', config.http.currentDomain);

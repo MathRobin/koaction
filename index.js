@@ -1,5 +1,3 @@
-const skill = require('./src/skills');
-
 module.exports = class Koaction {
     constructor(config) {
         const Koa = require('koa');

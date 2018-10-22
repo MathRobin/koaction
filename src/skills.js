@@ -1,13 +1,9 @@
-module.exports = async function (app, config) {
+async function whichNeedToBeLoaded (app, config) {
     const
         fileSystem = require('fs'),
-        path = require('path'),
         process = require('process'),
         availablePaths = fileSystem.readdirSync('./src/skills'),
-        stillNeedToBeLoaded = {};
-
-    let
-        iteratorForLoadedQueue;
+        result = {};
 
     for (const file of availablePaths) {
         if ('index.js' !== file && false === file.endsWith('.spec.js')) {
@@ -19,17 +15,25 @@ module.exports = async function (app, config) {
                 app.context[fileName] = await skillModule(config, app.context);
                 console.log('[+skills]', fileName);
             } else {
-                stillNeedToBeLoaded[fileName] = skillModule;
+                result[fileName] = skillModule;
             }
         }
     }
+}
+
+module.exports = async function (app, config) {
+    const
+        needToBeLoaded = whichNeedToBeLoaded(app, config);
+
+    let
+        iteratorForLoadedQueue;
 
     iteratorForLoadedQueue = 0;
-    if (Object.keys(stillNeedToBeLoaded).length) {
+    if (Object.keys(needToBeLoaded).length) {
         do {
             const
-                dependencieName = Object.keys(stillNeedToBeLoaded)[iteratorForLoadedQueue],
-                module = stillNeedToBeLoaded[dependencieName];
+                dependencieName = Object.keys(needToBeLoaded)[iteratorForLoadedQueue],
+                module = needToBeLoaded[dependencieName];
 
             module.dependsOn = module.dependsOn.filter(function (currentDependencie) {
                 return !Object.keys(app.context).includes(currentDependencie);
@@ -41,13 +45,13 @@ module.exports = async function (app, config) {
             }
 
             iteratorForLoadedQueue += 1;
-            if (Object.keys(stillNeedToBeLoaded).length === iteratorForLoadedQueue) {
+            if (Object.keys(needToBeLoaded).length === iteratorForLoadedQueue) {
                 iteratorForLoadedQueue = 0;
             }
             if (app.context[dependencieName]) {
                 iteratorForLoadedQueue = 0;
-                delete stillNeedToBeLoaded[dependencieName];
+                delete needToBeLoaded[dependencieName];
             }
-        } while (Object.keys(stillNeedToBeLoaded).length);
+        } while (Object.keys(needToBeLoaded).length);
     }
 };

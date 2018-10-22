@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --silent"
+    "test": "npm run eslint && jest --coverage --silent",
+    "eslint": "npx eslint src ./*.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/MathRobin/Koaction#readme",
   "dependencies": {
+    "eslint": "^5.7.0",
     "koa": "2.5.3",
     "nconf": "0.10.0"
   },
