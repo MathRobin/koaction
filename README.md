@@ -210,7 +210,7 @@ Some plugins are already available, they are all listed here.
 If you want, you can suggest your own plugin(s) by making a pull request. 
 
 ## Where is it used ?
-- MatosMaison.fr
-- Yorisa.fr
+- [MatosMaison.fr](https://www.matosmaison.fr/)
+- [Yorisa.fr](https://www.yorisa.fr/)
 
 Please, let us know if you use it ! We'll be proud to add you here !
