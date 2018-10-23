@@ -19,16 +19,19 @@ async function whichNeedToBeLoaded (app, config) {
             }
         }
     }
+
+    return result;
 }
 
 module.exports = async function (app, config) {
     const
-        needToBeLoaded = whichNeedToBeLoaded(app, config);
+        needToBeLoaded = await whichNeedToBeLoaded(app, config);
 
     let
         iteratorForLoadedQueue;
 
     iteratorForLoadedQueue = 0;
+    console.log('needToBeLoaded', needToBeLoaded);
     if (Object.keys(needToBeLoaded).length) {
         do {
             const

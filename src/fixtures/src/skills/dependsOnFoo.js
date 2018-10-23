@@ -1,5 +1,5 @@
 function withDependency () {
-    return 'bar';
+    return 'bar-depends';
 }
 
 withDependency.dependsOn = ['foo'];
