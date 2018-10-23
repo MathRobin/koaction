@@ -30,7 +30,7 @@ Every file, will be recursively read by koaction and be introduced as a new endp
 In the previous sample, file is `public/hello`, so this is the name of the route. and the exported function is `get`. So this is map to : `GET public/hello`.
 
 ##### Allowed methods and supercharge
-Any existing method defined by HTTP protocol is authorized by koaction : OPTIONS (dynamically mapped), HEAD, GET, OPTIONS, POST, DELETE, ...
+Any existing method defined by HTTP protocol is authorized by koaction : OPTIONS (dynamically mapped), HEAD, GET, POST, DELETE, ...
 
 You can force the method name or use multiple method name for only on method. Examples :
 ```javascript
