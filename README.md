@@ -182,7 +182,7 @@ You can provide a JSON configuration file for every environment you need. By def
   "db": {
     "DATABASE_URL": "..."
   },
-  ..
+  ...
 }
 ```
 In any skill, any middleware and in any endpoint, the config param correspond to the file corresponding to the current environment. You can have any environment as you want. We recommend at least `development` and `production`. 
@@ -212,5 +212,6 @@ If you want, you can suggest your own plugin(s) by making a pull request.
 ## Where is it used ?
 - [MatosMaison.fr](https://www.matosmaison.fr/)
 - [Yorisa.fr](https://www.yorisa.fr/)
+- [ImmoPaisible.fr](https://www.immopaisible.fr/)
 
 Please, let us know if you use it ! We'll be proud to add you here !
