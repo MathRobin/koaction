@@ -166,9 +166,26 @@ module.exports = sql;
 ``` 
 When starting the app will firstly boot the skills which depends on nothing and after the skills which depends on the first skills already resolved are resolved too.
 
-### Environnements
-You can provide a JSON configuration file for every environment you need. By default, these files are in `_conf` folder at root. Expect the `http` part, nothing else is mandatory and you are free to extend it as you want/need.
+#### Custmize
+
+Want to use another folder for skills ? Different ways usable :
 ```javascript
+const
+    Koaction = require('koaction'),
+    app = new Koaction({
+        paths : {
+            skills : '~/somewhere/else'
+        }
+    });
+
+app
+    .run();
+```
+Or in environments. See next chapter. 
+
+### Environments
+You can provide a JSON configuration file for every environment you need. By default, these files are in `_conf` folder at root. Expect the `http` part, nothing else is mandatory and you are free to extend it as you want/need.
+```json
 // File [project root]/_conf/env.development.json
 {
   "language": "fr",
@@ -181,6 +198,10 @@ You can provide a JSON configuration file for every environment you need. By def
   },
   "db": {
     "DATABASE_URL": "..."
+  },
+  "paths": {
+      "skills": ...,
+      ...
   },
   ...
 }

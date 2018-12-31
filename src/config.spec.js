@@ -4,31 +4,73 @@ const
 
 for (const environment of environments) {
     describe('config', () => {
-        let config;
+        describe('default', () => {
+            let config;
 
-        beforeEach(() => {
-            process.env.NODE_ENV = environment;
-            config = require('./config')({
-                name: 'koaction-demo',
-                version: '1.0.0',
-                http: {
-                    port: '3010',
-                    domain: 'localhost',
-                    protocol: 'http'
-                }
+            beforeEach(() => {
+                process.env.NODE_ENV = environment;
+                config = require('./config')({
+                    name: 'koaction-demo',
+                    version: '1.0.0',
+                    http: {
+                        port: '3010',
+                        domain: 'localhost',
+                        protocol: 'http'
+                    }
+                });
+            });
+
+            it('should have HTTP', () => {
+                expect(config.http.domain).toBeDefined();
+                expect(config.http.protocol).toMatch(/(http|https)/);
+            });
+
+            it('should have paths', () => {
+                expect(config.paths.skills).toBe('./src/skills');
+            });
+
+            it('should have other package.json important rules', () => {
+                expect(config.name).toBeDefined();
+                expect(config.version).toBeDefined();
+                expect(config.repository).toBeDefined();
+                expect(config.appVersion).toBeDefined();
             });
         });
 
-        it('should have HTTP', () => {
-            expect(config.http.domain).toBeDefined();
-            expect(config.http.protocol).toMatch(/(http|https)/);
-        });
+        describe('default', () => {
+            let config;
 
-        it('should have other package.json important rules', () => {
-            expect(config.name).toBeDefined();
-            expect(config.version).toBeDefined();
-            expect(config.repository).toBeDefined();
-            expect(config.appVersion).toBeDefined();
+            beforeEach(() => {
+                process.env.NODE_ENV = environment;
+                config = require('./config')({
+                    name: 'koaction-demo',
+                    version: '1.0.0',
+                    http: {
+                        port: '3010',
+                        domain: 'localhost',
+                        protocol: 'http'
+                    },
+                    paths: {
+                        skills: '~/skills'
+                    }
+                });
+            });
+
+            it('should have HTTP', () => {
+                expect(config.http.domain).toBeDefined();
+                expect(config.http.protocol).toMatch(/(http|https)/);
+            });
+
+            it('should have paths', () => {
+                expect(config.paths.skills).toBe('~/skills');
+            });
+
+            it('should have other package.json important rules', () => {
+                expect(config.name).toBeDefined();
+                expect(config.version).toBeDefined();
+                expect(config.repository).toBeDefined();
+                expect(config.appVersion).toBeDefined();
+            });
         });
     });
 }
