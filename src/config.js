@@ -1,4 +1,4 @@
-function freezeAll (target) {
+function freezeAll(target) {
     Object.freeze(target);
     Object
         .keys(target)
@@ -21,7 +21,13 @@ module.exports = function (superConfig) {
 
     nconf
         .argv()
-        .overrides({...{}, ...superConfig})
+        .overrides({
+            ...{
+                paths: {
+                    skills: './src/skills'
+                }
+            }, ...superConfig
+        })
         .file('./_conf/env.' + environment + '.json')
         .file('package', './package.json');
 

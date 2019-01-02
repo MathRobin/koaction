@@ -2,14 +2,14 @@ async function whichNeedToBeLoaded (app, config) {
     const
         fileSystem = require('fs'),
         process = require('process'),
-        availablePaths = fileSystem.readdirSync('./src/skills'),
+        availablePaths = fileSystem.readdirSync(process.cwd() + config.paths.skills),
         result = {};
 
     for (const file of availablePaths) {
         if ('index.js' !== file && false === file.endsWith('.spec.js')) {
             const
                 fileName = file.substring(0, file.length - 3),
-                skillModule = require(process.cwd() + '/src/skills/' + file);
+                skillModule = require(process.cwd() + config.paths.skills + file);
 
             if (!skillModule.dependsOn || !skillModule.dependsOn.length) {
                 app.context[fileName] = await skillModule(config, app.context);

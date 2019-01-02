@@ -1,5 +1,5 @@
 # Koaction
-[![npm version](https://badge.fury.io/js/koaction.svg)](https://badge.fury.io/js/koaction) [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/) [![NpmLicense](https://img.shields.io/npm/l/koaction.svg?style=popout)](https://github.com/MathRobin/koaction/blob/master/LICENSE)
+[![npm version](https://badge.fury.io/js/%40koaction%2Fkoaction.svg)](https://badge.fury.io/js/%40koaction%2Fkoaction) [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/) [![NpmLicense](https://img.shields.io/npm/l/koaction.svg?style=popout)](https://github.com/MathRobin/koaction/blob/master/LICENSE)
 
 /!\ Still under development
 
@@ -166,9 +166,26 @@ module.exports = sql;
 ``` 
 When starting the app will firstly boot the skills which depends on nothing and after the skills which depends on the first skills already resolved are resolved too.
 
-### Environnements
-You can provide a JSON configuration file for every environment you need. By default, these files are in `_conf` folder at root. Expect the `http` part, nothing else is mandatory and you are free to extend it as you want/need.
+#### Custmize
+
+Want to use another folder for skills ? Different ways usable :
 ```javascript
+const
+    Koaction = require('koaction'),
+    app = new Koaction({
+        paths : {
+            skills : '~/somewhere/else'
+        }
+    });
+
+app
+    .run();
+```
+Or in environments. See next chapter. 
+
+### Environments
+You can provide a JSON configuration file for every environment you need. By default, these files are in `_conf` folder at root. Expect the `http` part, nothing else is mandatory and you are free to extend it as you want/need.
+```json
 // File [project root]/_conf/env.development.json
 {
   "language": "fr",
@@ -182,7 +199,11 @@ You can provide a JSON configuration file for every environment you need. By def
   "db": {
     "DATABASE_URL": "..."
   },
-  ..
+  "paths": {
+      "skills": ...,
+      ...
+  },
+  ...
 }
 ```
 In any skill, any middleware and in any endpoint, the config param correspond to the file corresponding to the current environment. You can have any environment as you want. We recommend at least `development` and `production`. 
@@ -212,5 +233,6 @@ If you want, you can suggest your own plugin(s) by making a pull request.
 ## Where is it used ?
 - [MatosMaison.fr](https://www.matosmaison.fr/)
 - [Yorisa.fr](https://www.yorisa.fr/)
+- [ImmoPaisible.fr](https://www.immopaisible.fr/)
 
 Please, let us know if you use it ! We'll be proud to add you here !
