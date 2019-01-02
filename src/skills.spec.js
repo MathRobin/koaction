@@ -30,6 +30,9 @@ describe('skills', () => {
                     port: '3010',
                     domain: 'localhost',
                     protocol: 'http'
+                },
+                paths: {
+                    skills: '/src/skills/'
                 }
             });
         });
@@ -57,6 +60,9 @@ describe('skills', () => {
                     port: '3010',
                     domain: 'localhost',
                     protocol: 'http'
+                },
+                paths: {
+                    skills: '/src/skills/'
                 }
             });
         });

@@ -5,7 +5,7 @@ module.exports = class Koaction {
         this.app = new Koa();
         this.config = require('./src/config')(config);
 
-        require(this.config.paths.skills)(this.app, this.config);
+        require('./src/skills')(this.app, this.config);
 
         process
             .on('SIGTERM', function () {
