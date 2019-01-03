@@ -1,5 +1,5 @@
 # Koaction
-[![npm version](https://badge.fury.io/js/%40koaction%2Fkoaction.svg)](https://badge.fury.io/js/%40koaction%2Fkoaction) [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/) [![NpmLicense](https://img.shields.io/npm/l/koaction.svg?style=popout)](https://github.com/MathRobin/koaction/blob/master/LICENSE)
+[![npm version](https://badge.fury.io/js/%40koaction%2Fkoaction.svg)](https://badge.fury.io/js/%40koaction%2Fkoaction) [![CircleCI](https://circleci.com/gh/MathRobin/koaction.svg?style=svg)](https://circleci.com/gh/MathRobin/koaction) [![Build Status](https://travis-ci.org/MathRobin/koaction.svg?branch=master)](https://travis-ci.org/MathRobin/koaction) [![Greenkeeper badge](https://badges.greenkeeper.io/MathRobin/koaction.svg)](https://greenkeeper.io/) [![NpmLicense](https://img.shields.io/npm/l/koaction.svg?style=popout)](https://github.com/MathRobin/koaction/blob/master/LICENSE)
 
 /!\ Still under development
 
