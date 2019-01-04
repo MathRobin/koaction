@@ -7,6 +7,11 @@
     "test": "npm run eslint && jest --coverage --silent",
     "eslint": "npx eslint src ./*.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run eslint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MathRobin/Koaction.git"
@@ -30,6 +35,7 @@
     "nconf": "0.10.0"
   },
   "devDependencies": {
+    "husky": "1.3.1",
     "jest": "23.6.0"
   }
 }
