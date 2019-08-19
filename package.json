@@ -26,7 +26,7 @@
   "homepage": "https://github.com/MathRobin/Koaction#readme",
   "dependencies": {
     "eslint": "5.8.0",
-    "koa": "2.6.1",
+    "koa": "2.8.0",
     "nconf": "0.10.0"
   },
   "devDependencies": {
